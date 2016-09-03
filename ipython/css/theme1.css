@@ -1,0 +1,6 @@
+<style>
+html, body, p, h3, h2, h1, table, div, span, .container {font-family: "Trebuchet MS", "Open Sans", Segoe UI light, Verdana, Tahoma, Helvetica, sans-serif; background: #111; color: #aa8 !important;}
+a {color:#aa6; text-decoration:underline;}
+a:hover {color:#aa4; text-decoration:underline;}
+.prompt, .output, .input_area, #menubar, nav, footer, .slideInDown, .slideOutUp {visibility:hidden !important;opacity:0 !important;}
+</style>

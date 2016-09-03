@@ -1,0 +1,783 @@
+<!DOCTYPE xhtml>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Food and Energy in the Global Sustainable Energy Transition:
+	An Energy Metabolism View of Global Agriculture Systems #foodenergyflows #sankey #science @csaladenes" />
+		<meta name="keywords" content="food energy flows, csaladenes, set, system dynamics, sustainable energy transitions, renewable energy, food energy, energy return on energy invested, eroei, eroi, sgouris sgouridis, denes csala, ssgouridis, dcsala, science, nature, article, food science, food energy, sankey diagram, d3.js, ipython, energy system, eroei chart, es food, flow of food chart, energy flow diagram, energy flows" />
+		<meta property="og:image" content="http://food.csaladen.esfood_energy_flows_sankey.jpg" />
+		<meta property="og:description" content="Food and Energy in the Global Sustainable Energy Transition:
+	An Energy Metabolism View of Global Agriculture Systems #foodenergyflows #sankey #science @csaladenes" />
+		<meta property="og:title" content="Food Energy Flows" />
+		<meta property="og:type" content="article" />
+		<meta property="og:site_name" content="food.csaladen.es" />
+		<meta property="og:url" content="http://food.csaladen.es" />
+		<meta property="fb:admins" content="100943737036023614165" />
+		<title>Food Energy Flows</title>
+		<link rel="shortcut icon" href="favicon.png" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				font-family: "Trebuchet MS", "Open Sans", Segoe UI light, Verdana, Tahoma, Helvetica, sans-serif;
+				overflow: hidden;
+				margin: 0;
+				padding: 0;
+				background:#111;
+				color:#aa8;
+			}
+			#chart {
+				height: 99%;
+				float: left;
+				position: absolute;
+				width: -moz-calc(80% - 45px);
+				width: -webkit-calc(80% - 45px);
+				width: calc(80% - 45px);
+			}
+			#chart3 {
+				cursor:pointer;
+			}
+			#mypie {
+				position: fixed;
+				top: 285px;
+				right: 0px;
+				z-index: 8;
+				font-size: 11px;
+				font-weight: bold;
+				width: 20%;
+				padding-left: 0px;
+				margin-left: 0px;
+				margin-right: 10px;
+			}
+			#mypie2 {
+				position: fixed;
+				top: 285px;
+				right: 0px;
+				z-index: 7;
+				font-size: 11px;
+				font-weight: bold;
+				padding-left: 0px;
+				margin-left: 0px;
+			}
+			.centerpielabel {
+				text-anchor: middle;
+				font-weight: bold;
+			}
+			a, a:active {
+				text-decoration: none;
+			}
+			.link2 {
+				text-decoration:underline;
+			}
+			a:hover, a:focus, .link2:hover{
+				text-decoration:underline;
+				cursor:pointer;
+			}
+			#social {
+				position: fixed;
+				bottom: 5;
+				right: 0;
+				text-decoration: none;
+				padding: 3px;
+				padding-top:1px;
+				z-index: 800;
+				white-space:nowrap;
+				overflow:hidden;
+			}
+			#social a{
+				margin-left:10px;
+				margin-right:5px;
+				font-size: 10px;
+				font-family: "Trebuchet MS";  
+				font-weight: lighter;
+				text-decoration: none;			
+			}
+			.pagetitle {
+				height: 30px;
+				font-size: 20px;
+				line-height: 30px;
+				text-align: center;
+				font-weight: bold;
+				font-style: oblique
+			}
+			.pagetitle:hover {
+				cursor: pointer;
+			}
+			#titlebar img:hover {
+				cursor: pointer;
+			}
+			.node rect {
+				cursor: move;
+				fill-opacity: .9;
+				shape-rendering: crispEdges
+			}
+			.node text {
+				pointer-events: none;
+			}
+			.link {
+				stroke: #000;
+				stroke-opacity: .3;
+			}
+			.link:hover {
+				stroke-opacity: .7;
+			}
+			.link:hover, .nv-slice:hover {
+				cursor:help;
+			}
+			input:hover, select:hover, option:hover {
+				cursor:pointer;
+			}
+			#titlebar {
+					width: -moz-calc(80% - 90px);
+					width: -webkit-calc(80% - 90px);
+					width: calc(80% - 90px);
+					height: 30px;
+				border-bottom: solid #111;;
+				padding-bottom: 5px;
+				margin-left: 40px;
+				margin-top: 5px;
+				position: fixed;
+				z-index: 9;
+			}
+			#titlebar-right {
+				right: -moz-calc(20% + 50px);
+				right: -webkit-calc(20% + 50px);
+				right: calc(20% + 50px);
+				height: 30px;
+				padding-bottom: 5px;
+				margin-left: 40px;
+				margin-top: 5px;
+				position: fixed;
+				z-index: 9;
+			}
+			.dragdealer {
+				height: 30px;
+				z-index: 8;
+			}
+			.dragdealer .handle {
+				top: 0;
+				left: 0;
+				cursor: pointer;
+				opacity:1;
+			}
+			.dragdealer .red-bar {
+				width: 100px;
+				height: 30px;
+				font-size: 20px;
+				line-height: 30px;
+				text-align: center;
+				font-weight: bold;
+				font-style: oblique
+			}
+			.dragdealer .orange-bar {
+				width: 25px;
+				height: 18px;
+				font-size: 18px;
+				line-height: 16px;
+				text-align: center;
+				font-weight: bold;
+			}
+			.dragdealer .handle:hover{
+				outline:1px solid;
+				-moz-box-shadow: 0 0 15px #667;
+				-webkit-box-shadow: 0 0 15px #667;
+				box-shadow:  0 0 15px #667;
+			}
+			#map{
+				position: fixed;
+				top:40px;
+				left:40px;
+				border-top: solid;
+				width: -moz-calc(100% - 70px);
+				width: -webkit-calc(100% - 70px);
+				width: calc(100% - 70px);
+				height: -moz-calc(100% - 70px);
+				height: -webkit-calc(100% - 70px);
+				height: calc(100% - 70px);
+				text-align:center;
+			}
+			iframe {
+				border:none;
+				margin-top:10px;
+				margin-left:0px;
+				width:100%;
+				height:100%;
+			}
+			.nbembed{
+				position: fixed;
+				top:40px;
+				left:40px;
+				border-top: solid;
+				width: -moz-calc(100% - 70px);
+				width: -webkit-calc(100% - 70px);
+				width: calc(100% - 70px);
+				height: -moz-calc(100% - 70px);
+				height: -webkit-calc(100% - 70px);
+				height: calc(100% - 70px);
+				text-align:center;
+			}
+			div.tooltip {
+				line-height: 1;
+				font-weight: bold;
+				font-size: 12px;
+				padding: 4px;
+				z-index:2000;
+				position:absolute;
+				border:1px solid;
+			}
+			#titlebar img:hover{
+				-moz-box-shadow: scale(1.4);
+				-webkit-transform: scale(1.4);
+				transform:  scale(1.4);
+			}
+			.button:hover{
+				text-decoration:underline;
+				cursor:pointer;
+			}
+		</style>
+		<link href="css/nv.d3.css" rel="stylesheet"/>
+		
+		<script>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+			ga('create', 'UA-53020620-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+	
+		<script src="js/dragdealer.js"></script>
+		<script src="js/d3.v3.min.js"></script>
+		<script src="js/nv.d3.min.js"></script>
+		<script>
+			var sizecorrection = Math.max(0, 220 - parseInt(window.innerWidth * 0.2));
+			function checksize() {
+				if (window.innerWidth < 1000) {
+					document.getElementById("titlebar-right").style.display = "none";
+				} else {
+					document.getElementById("titlebar-right").style.display = "inline";
+				}
+				if ((window.innerWidth < 800) || (window.innerHeight < 600)) {
+					alert("The recommended minimum resolution is 800 x 600.\n Yours is " + window.innerWidth + " x " + window.innerHeight + ".");
+				}
+				setTimeout(function(){
+				d3.select("#loading").style("display", "none");
+				var text="Sankey Diagram";
+				if (inithash=="#&description") {text="Description"};
+				if (inithash=="#&map") {text="World Map"};
+				if (inithash=="#&scatter") {text="Data Plots"};
+				d3.select("#titletext").text("Food Energy Flows "+text);
+				if ((inithash=="#&map") || (inithash=="#&description") || (inithash=="#&scatter"))
+					{
+					d3.select("#"+inithash.slice(2,inithash.length)).style("visibility", "visible");
+					d3.select("#"+inithash.slice(2,inithash.length)).transition().style("opacity", 1);
+					d3.select("#"+inithash.slice(2,inithash.length)).style("z-index", 0);
+					}
+				else
+					{
+					d3.select("#content").style("visibility", "visible");
+					d3.select("#content").transition().style("opacity", 1);
+					}
+				}, 500);
+				setTimeout(function(){
+					d3.select("#social").transition().style("opacity", 1);
+				},5000);
+				setTimeout(function(){
+					d3.select("#helppop").transition().style("opacity", 1);
+				},8000);
+			}
+			window.onresize = function() {
+				window.location.reload();
+			}
+		</script>
+		
+		<script type="text/javascript">var switchTo5x=true;</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "505a26ad-d820-47bd-a500-7f49d04a30f5", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script>
+		
+		</head>
+	<body onload="checksize();">
+
+		<!--TITLELBAR-->
+
+		<div id="titlebar" class="acc">
+			<img id="favicon" onclick="disp_content('#content',myhash);" src="favicon2.png" alt="Sankey Diagram" title="Sankey Diagram" style="height:20px; width:20px; margin-left:5px; margin-top:0px;"/>
+			<img id="worldicon" onclick="disp_content('#map','#&map')" src="world2.png" alt="World Map" title="World Map" style="height:20px; width:20px; margin-left:5px; margin-top:0px;"/>
+			<img id="scattericon" onclick="disp_content('#scatter','#&scatter')" src="scatter2.png" alt="Data Plots" title="Data Plots" style="height:20px; width:20px; margin-left:5px; margin-top:0px;"/>
+			<img id="helpicon" onclick="disp_content('#description','#&description')" src="help2.png" alt="Description" title="Description" style="height:20px; width:20px; margin-left:0px; margin-top:0px; margin-right:10px;"/>
+			<span id="titletext" class="pagetitle" title="Food Energy Flows" onclick="document.getElementById('helppop').style.display='block'">Welcome to The Food Energy Flows Exploratorium!</span>
+		</div>
+		
+		<!--LOADING-->
+		
+		<div id="loading" class="pagetitle" style="font-size:75px;z-index:0;position:absolute;top:120px;left:100px;">Loading...</div>
+		
+		<!--HELP POPUP-->
+
+		<div id="helppop" class="help" style="font-size:12px;padding:15px;position:absolute; left:0 top:0; margin-left:40px; margin-top:43px; z-index:200; line-height:15px;border:1px solid; opacity:0;">
+			<span><b>&#8593;</b>&nbsp;&nbsp;Use the top menu to view the world map, scatter plots and the detailed help.</span>
+			<span style="float:right;right:0px;top:-5px;position:relative;cursor:pointer;" onclick="document.getElementById('helppop').style.display='none'">&lt;ESC&gt;&nbsp;&nbsp;&nbsp;&nbsp;<b style="line-height:20px;font-size:18px;">x</b></span>
+			<ul>
+				<li>Navigation
+					<ul>
+						<li>Select the country, year and the desired detail level from the menu on the right.</li>
+						<li>You can choose from 4 different datasets (vertical):
+							<ul>
+								<li>Total biomass energy [TWh]</li>
+								<li>Food system energy [TWh]</li>
+								<li>Agri-sytem energy [TWh]</li>
+								<li>Food system weight [ktonnes].</li>
+							</ul>
+						</li>
+						<li>and 4 detail levels (horizontal):
+							<ul>
+								<li>Food hypergroups</li>
+								<li>Food supergroups</li>
+								<li>FAO food groups</li>
+								<li>FAO crop groups</li>
+							</ul>
+						</li>
+						</li>
+					</ul>
+				</li>
+				<li>Layout
+					<ul>
+						<li>Scrolling over the diagram (or using arrow keys) will advance time.</li>
+						<li>Node and flow heights will be defined by the main unit of the dataset.</li>
+						<li>Drag nodes around to adjust the layout of the diagram.</li>
+						<li>Enable/disable horizontal/vertical node movement from the menu on the right.</li>
+						<li>Double click a node to hide/show all of its outgoing flows.</li>
+						<li>Hover over a node to display its value in the main unit of the dataset.</li>
+						<li>Hover over a flow to display:
+							<ul>
+								<li>its value and breakdown in [TWh] and [ktonnes]</li>
+								<li>its caloric value in [kcal/100g]</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Pie chart
+					<ul>
+						<li>Upon hover over a node or a flow, a pie chart will show in the bottom right corner.</li>
+						<li>When over a flow, its breakdown will be displayed, with the value at the center.</li>
+						<li>When over a node, the incoming and outgoing flow breakdowns will be displayed.</li>
+						<li>You can enable or disable items on the pie chart by clicking on the legend entries.</li>
+						<li>Pie chart units always correspond to the main unit of the dataset.</li>
+						<li>Hover over a pie chart slice to display its value.</li>
+					</ul>
+				</li>
+				<li>EROEI & Data info
+					<ul>
+						<li>You will find EROEI information on the top right corner of the main diagram.</li>
+						<li>A line chart will display the evolution of EROEI, NAEC and adjusted EROEI.</li>
+						<li>Hovering over the line chart points will show the corresponding EROEI values.</li>
+						<li>Clicking on an item will automatically scroll to the selected year.</li>
+						<li>Hover over the <i>Data Availability</i> label in the top left corner for more info on data.
+					</ul>
+				</li>
+			</ul>
+			Last updated: 08/09/2015
+			<div class="help" style="line-height:20px; display: block; float: right;  z-index: 199;  position: absolute; padding-right:15px;right: 20px; top: 100px; border:1px solid;">
+				<ul>
+					<li style="margin-bottom:8px;">Minimum resolution: <b>800 x 600</b></li>
+					<li>
+						<img src="css/win.png" style="width:16px;height:16px;" alt="If you are using Windows" title="If you are using Windows"/>
+						<img src="" style="width:5px;height:0px;" alt=""/>--<img src="" style="width:10px;height:0px;" alt=""/>
+						<img src="css/chrome.png" style="width:16px;height:16px;" alt="Google Chrome supported" title="Google Chrome supported"/>
+						<img src="css/maxthon.png" style="width:16px;height:16px;" alt="Maxthon Cloud Browser supported" title="Maxthon Cloud Browser supported"/>
+						<img src="css/ie.png" style="width:16px;height:16px;" alt="Internet Explorer 9.0+ supported" title="Internet Explorer 9.0+ supported"/>
+					</li>
+					<li>
+						<img src="css/apple.png" style="width:16px;height:16px;" alt="If you are using a Mac" title="If you are using a Mac"/>
+						<img src="" style="width:5px;height:0px;" alt="">--<img src="" style="width:10px;height:0px;" alt=""/>
+						<img src="css/chrome.png" style="width:16px;height:16px;" alt="Google Chrome supported" title="Google Chrome supported"/>
+						<img src="css/maxthon.png" style="width:16px;height:16px;" alt="Maxthon Cloud Browser supported" title="Maxthon Cloud Browser supported"/>
+						<img src="css/safari.png" style="width:16px;height:16px;" alt="Apple Safari supported" title="Apple Safari supported"/>
+					</li>
+					<li>
+						<img src="css/android.png" style="width:16px;height:16px;" alt="If you are using Android/Linux" title="If you are using Android/Linux"/>
+						<img src="" style="width:5px;height:0px;" alt=""/>--<img src="" style="width:10px;height:0px;" alt=""/>
+						<img src="css/chrome.png" style="width:16px;height:16px;" alt="Google Chrome supported" title="Google Chrome supported"/>
+						<img src="css/maxthon.png" style="width:16px;height:16px;" alt="Maxthon Cloud Browser supported" title="Maxthon Cloud Browser supported"/>
+					</li>
+				</ul>
+			</div>
+			<div style="line-height:20px; display: block; float: right;  z-index: 199;  position: absolute; padding-right:15px;right: 22px; top: 137px;">
+				<table style="cursor:pointer;" alt="Select theme" title="Select theme">
+					<tr><td id="light" style="padding:4px;"><b>&nbsp;light&nbsp;</b></td></tr>
+					<tr><td id="dark" style="padding:4px;"><b>&nbsp;dark&nbsp;</b></td></tr>
+				</table>
+			</div>
+		</div>
+
+		
+		
+		<!--PAGE WRAPPER-->
+
+		<div id="content" style="opacity:0;visibility:hidden;">
+
+			<div id="titlebar-right"> <span class="pagetitle" id="cid"></span>
+				<span class="pagetitle" style="margin-left:5px; margin-right:5px;">|</span>
+				<span class="pagetitle" id="yid"></span>
+			</div>
+
+			<!--SANKEY DIAGRAM CONTROLS-->
+
+			<div id="sourcecontrol" class="acc" style="float:right; margin-right:10px; width:20%; margin-top:10px; min-width:220px; border-left:solid; height:98%; padding-left:20px;line-height:26px;z-index:600000;">
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Country:</span><span style="float:right;">
+				<select id="json_sources" name="json_sources" style="width:130px;direction: rtl;"></select>
+			 </span>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Year:</span><span style="float:right;">
+				<select id="years" name="years" style="width:130px;direction: rtl;"></select>
+			 </span>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Total biomass:</span><span style="float:right;">
+			 <input type="radio" title="1: Food hypergroups" onclick="change();" name="r1" id="b00" value="1" />
+			 <input type="radio" title="2: Food supergroups" onclick="change();" name="r1" id="b10" value="2" />
+			 <input type="radio" title="3: FAO food groups" onclick="change();" name="r1" id="b20" value="3" />
+			 <input type="radio" title="4: FAO crop groups" onclick="change();" name="r1" id="b30" value="4" />
+			 </span>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Food system:</span><span style="float:right;">
+			 <input type="radio" title="1: Food hypergroups" onclick="change();" name="r1" id="b01" value="1" />
+			 <input type="radio" title="2: Food supergroups" onclick="change();" name="r1" id="b11" value="2" />
+			 <input type="radio" title="3: FAO food groups" onclick="change();" name="r1" id="b21" value="3" />
+			 <input type="radio" title="4: FAO crop groups" onclick="change();" name="r1" id="b31" value="4" />
+			 </span>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Agri-system:</span><span style="float:right;">
+			 <input type="radio" title="1: Food hypergroups" onclick="change();" name="r1" id="b02" value="1" />
+			 <input type="radio" title="2: Food supergroups" onclick="change();" name="r1" id="b12" value="2" />
+			 <input type="radio" title="3: FAO food groups" onclick="change();" name="r1" id="b22" value="3" />
+			 <input type="radio" title="4: FAO crop groups" onclick="change();" name="r1" id="b32" value="4" />
+			 </span>
+				</div>			
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Food weight:</span><span style="float:right;">
+				<input type="radio" title="1: Food hypergroups" onclick="change();" name="r1" id="b03" value="1" />
+				<input type="radio" title="2: Food supergroups" onclick="change();" name="r1" id="b13" value="2" />
+				<input type="radio" title="3: FAO food groups" onclick="change();" name="r1" id="b23" value="3" />
+				<input type="radio" title="4: FAO crop groups" onclick="change();" name="r1" id="b33" value="4" />
+				</span>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Move nodes:</span>
+					<div style="float:right; padding-right:0; margin-right:0;">
+						<div style="font-size:20px;font-weight:bold;line-height:10px;">
+							<input title="Enable horizontal node dragging" type="checkbox" id="xmove">
+							<label for="xmove">↔</label>
+							<img alt="" style="width:5px;height:0px;">
+							<input title="Enable vertical node dragging" type="checkbox" id="ymove" checked>
+							<label for="ymove">↕</label>
+						</div>
+					</div>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Density:</span>
+					<div style="float:right;">
+						<div id="pslider" title="Drag slider to set diagram node padding" class="dragdealer" style="margin-top:2px;margin-left:-130px;width:130px; height:18px; position:absolute;">
+							<div class="handle orange-bar">↔
+								<script>
+									var densityslider = new Dragdealer("pslider", {
+										x: 0.5,
+										steps: 5,
+										snap: true,
+										callback: function(a, b) {
+											padding = paddingmultiplier * (1 - a) + 3;
+											change()
+										}
+									});
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;"><span style="float:left;">Opacity:</span>
+					<div style="float:right;">
+						<div id="oslider" title="Drag slider to set diagram flow opacities" class="dragdealer" style="margin-top:2px;margin-left:-130px;width:130px; height:18px; position:absolute;">
+							<div class="handle orange-bar">↔
+								<script>
+									new Dragdealer("oslider", {
+										x: 0.25,
+										steps: 5,
+										snap: true,
+										callback: function(a, b) {
+											lowopacity = 0.1 + 0.8 * a;
+											change()
+										}
+									});
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="acc" style="display:block;overflow: hidden;white-space: nowrap; border-bottom:solid; padding-bottom:10px;">
+					<span style="float:left;">Breakdown:
+				<input type="checkbox" title="Toggle piechart"  id="legend" onclick='updpievis()' checked /></span>
+					<span style="float:right;">Legend:
+				<input type="checkbox" title="Toggle piechart legend" id="legend2" onclick='updpieleg()' checked /></span>
+				</div>
+				<div id="units" style="position:absolute;right:10px;bottom:30px;">
+					TWh
+				</div>
+			</div>
+
+			<!--PIE CHARTS-->
+
+			<div id="mypie" class="pielegend">
+				<svg style="width:100%;height:100%;"></svg>
+			</div>
+			<div id="mypie2" class="pielegend">
+				<svg style="width:100%;height:100%;"></svg>
+			</div>
+
+			<!--SANKEY DIAGRAM-->
+
+			<div id="chart" onmousewheel="scrollsankey(event.wheelDelta)" style="z-index:5;">
+
+				<!--EROEI MINI-SANKEY-->
+
+				<div style="display: block; float: right;  z-index: 3;  position: absolute; right: 5px; top: 43px;">
+					<table style="text-align:right;" cellpadding="0" cellspacing="0">
+						<tr>
+							<td rowspan="2" id="chart2"></td>
+							<td id="ER" class="pagetitle" style="font-size:25px; width:88px;">EROEI</td>
+						</tr>
+						<tr>
+							<td id="EROEI" class="pagetitle" style="font-size:35px;">2.00</td>
+						</tr>
+						<tr>
+							<td colspan="2" id="chart3">
+								<svg style="width:240px;height:40px;"></svg>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<!--DATA QUALITY INFO-->
+				
+				<div id="qualitywrap" style="position:absolute;left:40px;top:45px;text-align:center;" alt="" title="">
+					<table style="text-align:left; font-size:15px; margin:0px; padding:0px;" cellpadding="0" cellspacing="0" class="pagetitle">
+					<tr><td >Data Availability</td>
+					</tr><tr><td id="quality" style="font-size:35px;line-height:12px;"></td></tr></table>
+				</div>
+
+			</div>
+
+			<!--TIME SLIDER-->
+
+			<div id="timeslider" title="Drag slider to set display year. Identical to mouse scroll." class="dragdealer" style="position:fixed; bottom:20; left:40;">
+				<div class="handle red-bar"> <span class="value"></span>
+				</div>
+			</div>
+
+			<!---------SCRIPTS----------->
+
+			<script src="js/sankey.js"></script>
+			<script src="js/food.js"></script>
+		
+		</div>
+		
+		<!--MAP WRAPPER-->
+		
+		<div id="map" style="opacity:0;z-index:-1;visibility:hidden;">
+			<iframe id="imap" src="map/1/index.html"></iframe>
+			<script>document.getElementById("imap").src=datapath+"map/1/index.html"</script>
+		</div>
+		
+		<!--SCATTER WRAPPER-->
+		
+		<div id="scatter" style="opacity:0;z-index:-1;padding-top:0px;visibility:hidden;text-align:center;">
+			
+			<!--PLOT CONTROLS-->
+
+			<div id="plotcontrol" style="text-align:left;float:right; right:0px;position:absolute; margin-right:10px; width:20%; margin-top:10px; min-width:220px; border-left:solid; height:98%; padding-left:20px;line-height:26px;">
+				<div style="display:block;overflow: hidden;white-space: nowrap;">
+					<span>System energy input-output balance</span>
+					<br/>
+					<span style="float:left;">Country:</span>
+					<span style="float:right;">
+						<select id="json_sources2" name="json_sources2" style="width:130px;direction: rtl;"></select>
+					</span>
+				</div>
+				<br/>
+				<div style="display:block;overflow: hidden;white-space: nowrap;">
+					<span>Evolution of system EROEI vs.:</span>
+					<br/>
+					<span>Per capita GDP</span>
+					<span>
+						<input type="radio" title="Per capita GDP" name="r11" class="r11" value="eroei" checked />
+					</span>
+					<span>&nbsp;&nbsp;&nbsp;</span>
+					<span>Yield</span>
+					<span>
+						<input type="radio" title="Yield" name="r11" class="r11" value="groei" />
+					</span>
+					<br/>
+					<span style="float:left;">Year:</span>
+					<span style="float:right;">
+						<button id="json_sources3_minus">&lt;</button><select id="json_sources3" name="json_sources3" style="width:77px;direction: rtl;"></select><button id="json_sources3_plus">&gt;</button>
+					</span>
+					<br/>
+					<span>lin-lin</span>
+					<span>
+						<input type="radio" title="lin-lin" name="r12" class="r12" value="0" />
+					</span>
+					<span>&nbsp;&nbsp;&nbsp;</span>
+					<span>log-lin</span>
+					<span>
+						<input type="radio" title="log-lin" name="r12" class="r12" value="1" />
+					</span>
+					<span>&nbsp;&nbsp;&nbsp;</span>
+					<span>log-log</span>
+					<span>
+						<input type="radio" title="log-log" name="r12" class="r12" value="2" checked />
+					</span>
+				</div>
+				<br/>
+				<div style="display:block;overflow: hidden;white-space: nowrap;" class="button" onclick='d3.select("#main").attr("src",datapath+"plots/all_eroei.png");'>Evolution of EROEI vs. GDP</div>
+				<div style="display:block;overflow: hidden;white-space: nowrap;" class="button" onclick='d3.select("#main").attr("src",datapath+"plots/all_groei.png");'>Evolution of EROEI vs. Yield</div>
+				<br/>
+				<br/>
+				<div class="link2" style="display:block;overflow: hidden;white-space: nowrap;" onclick="disp_content('#description','#&description')">Description</div>
+			</div>
+			
+			<!--MAIN IMAGE PLACEHOLDER-->
+			
+			<img src="favicon.png" style="position:relative;width:100px;margin-top:50px;margin-left:40px;" id="main"/>
+			
+			<!---------SCRIPTS----------->
+
+			<script src="js/scatter.js"></script>		
+			
+		</div>
+		
+		<!--TEXT WRAPPER-->
+		
+		<div id="description" class="nbembed" style="opacity:0;z-index:-1;padding-top:0px;visibility:hidden;">
+			<iframe id="idescription"  style="margin-top:0px;" src="map/1/index.html"></iframe>
+		</div>
+		
+		<!--SOCIAL-->
+		
+		<div id="social" style="opacity:0; z-index:800;">
+			<span class='st_facebook'></span>
+			<span class='st_twitter'></span>
+			<span class='st_googleplus'></span>
+			<span class='st_linkedin'></span>
+			<span class='st_tumblr'></span>
+			<span class='st_reddit'></span>
+			<span class='st_email'></span>
+			<span>
+				<a href="http://www.csaladen.es" title="created by" alt="created by">© D.C. 2015</a>
+			</span>
+		</div>
+		
+		<!--THEME SELECTOR-->
+		
+		<script>
+			
+		var themeid=1;
+		var themes=["#light","#dark"];
+		var themebg=["#fff","#111"];
+		var themebgacc=["#eee","#222"];
+		var themefont=["#000","#aa8"];
+		var themetitlefont=["#f60","#aa8"];
+		var themesankeyfont=["#000","#aa8"];
+		var themesankeyfontw=["normal","bold"];
+		var themepiefont=["#000","#111"];
+		var themecolor=["#f60","#aa8"];
+		var themeacc=["#f80","#aa6"];
+		var themetooltipbg=["rgba(255,255,255,0.9)","rgba(0,0,0,0.9)"];
+		var themetooltipborder=["rgba(0,0,0,0.2)","rgba(255,255,255,0.2)"];
+		var themehelpbg=["rgba(255,255,255,0.8)","rgba(0,0,0,0.9)"];
+		var themefavicon=["favicon","favicon2"];
+		var themeworldicon=["world","world2"];
+		var themescattericon=["scatter","scatter2"];
+		var themehelpicon=["help","help2"];
+		
+		//set theme cell colors
+		themes.forEach(function(k,i){
+			d3.select(k)
+				.style("background",themebg[i])
+				.style("color",themefont[i])
+		})
+		
+		var piecolor=function(k){
+			d3.selectAll(".nv-label text")
+				.style("fill",themepiefont[k])
+			d3.selectAll(".nv-pie path")
+				.style("stroke",themebgacc[k])
+		}
+		
+		var theme=function(k){
+			themeid=k;
+			
+			//sankey update
+			piecolor(k);
+			d3.select("body")
+				.style("background",themebg[k])
+				.style("color",themefont[k])
+				.style("fill",themefont[k])
+			d3.select("#imap")
+				.style("background",themebg[k])
+			d3.selectAll("#social a")	
+				.style("color",themefont[k])
+			d3.selectAll(".pagetitle")	
+				.style("color",themetitlefont[k])
+			d3.selectAll(".acc").style("border-color",themebgacc[k]);
+			d3.selectAll("#map").style("border-color",themebgacc[k]);
+			d3.selectAll("#plotcontrol").style("border-color",themebgacc[k]);
+			d3.selectAll("#description").style("border-color",themebgacc[k]);
+			d3.selectAll(".dragdealer").style("background",themebgacc[k]);
+			d3.selectAll("#json_sources, #years, #json_sources2, #json_sources3")
+				.style("background",themebgacc[k])
+				.style("color",themefont[k])
+				.style("border-color",themetooltipborder[k]);
+			d3.selectAll(".handle")
+				.style("color",themebg[k])
+				.style("background",themecolor[k])
+			d3.selectAll(".tooltip")
+				.style("background",themetooltipbg[k])
+				.style("border-color",themetooltipborder[k]);
+			d3.selectAll(".help")
+				.style("background",themehelpbg[k])
+				.style("border-color",themetooltipborder[k]);
+			svg.style("font-weight",themesankeyfontw[k])
+				.style("text-shadow","0 1px 0 "+themebg[k]);
+			svg2.style("font-weight",themesankeyfontw[k])
+				.style("text-shadow","0 1px 0 "+themebg[k]);
+			d3.select("#ER").style("text-shadow","0 2px 0 "+themebg[k]);
+			d3.select("#EROEI").style("text-shadow","0 2px 0 "+themebg[k]);
+			d3.select("#favicon").attr("src",themefavicon[k]+".png");
+			d3.select("#worldicon").attr("src",themeworldicon[k]+".png");
+			d3.select("#scattericon").attr("src",themescattericon[k]+".png");
+			d3.select("#helpicon").attr("src",themehelpicon[k]+".png");
+			
+			//scatter update
+			scrollscatter(1);
+			scrollscatter(-1);
+			
+			//map update
+			document.getElementById("imap").src=datapath+"map/"+k+"/index.html"
+			
+			//description update
+			document.getElementById("idescription").src="http://nbviewer.ipython.org/url/food.csaladen.es/ipython/description"+k+".ipynb"
+		}
+		
+		d3.select("#light").on("click",function(){theme(0)});
+		d3.select("#dark").on("click",function(){theme(1)});
+		
+		//initialize theme
+		theme(themeid);
+		
+		</script>
+	
+	</body>
+	
+</html>
