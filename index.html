@@ -587,7 +587,7 @@
 		
 		<div id="map" style="opacity:0;z-index:-1;visibility:hidden;">
 			<iframe id="imap" src="map/1/index.html"></iframe>
-			<script>document.getElementById("imap").src=datapath+"map/1/index.html"</script>
+			<script>document.getElementById("imap").src="map/1/index.html"</script>
 		</div>
 		
 		<!--SCATTER WRAPPER-->
@@ -764,7 +764,7 @@
 			scrollscatter(-1);
 			
 			//map update
-			document.getElementById("imap").src=datapath+"map/"+k+"/index.html"
+			document.getElementById("imap").src="map/"+k+"/index.html"
 			
 			//description update
 			document.getElementById("idescription").src="http://nbviewer.ipython.org/url/food.csaladen.es/ipython/description"+k+".ipynb"

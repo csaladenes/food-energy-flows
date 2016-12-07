@@ -43,7 +43,6 @@ var datapath =  ((window.location.hostname=='localhost')
 				)
 				+'Food-Energy/';
 //////////////////
-console.log(datapath)
 
 //function to display content (from hash or menu)
 function disp_content(a,hash){

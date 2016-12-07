@@ -26,7 +26,6 @@ var datapath =  ((window.location.hostname=='localhost')
 				)
 				+'Food-Energy/';
 //////////////////
-console.log(datapath)
 
 //<!--DYNAMIC SELECTORS-->
 
