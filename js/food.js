@@ -26,12 +26,24 @@ String.prototype.addLines = function(){ return this.replace(/,/g,"\n")}
 //<!--convert non-default URL-->
 
 //set global database path
-
+////////////
+//DEPRECATED
+////////////
 //var datapath = "https://dl.dropboxusercontent.com/u/333992592/Food-Energy/"  //old MIT dropbox
-var datapath = "https://dl.dropboxusercontent.com/u/531697/datarepo/Food-Energy/" //default
+//var datapath = "https://dl.dropboxusercontent.com/u/531697/datarepo/Food-Energy/" //default
 //var datapath = "http://food.csaladen.es/"  //if data on github server
 //var datapath = "" //for local testing
-
+////////////////////
+//NEW DYNAMIC METHOD
+///////////////////
+//check if in dev mode and on local server
+var datapath =  ((window.location.hostname=='localhost')
+				?'http://localhost:7000/'
+				:"https://dl.dropboxusercontent.com/u/531697/datarepo/"
+				)
+				+'Food-Energy/';
+//////////////////
+console.log(datapath)
 
 //function to display content (from hash or menu)
 function disp_content(a,hash){
