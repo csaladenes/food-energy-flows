@@ -72,7 +72,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 	var dr2=true;	
 	
 	var dropdown2click=function(){dr2=true;d3.select("#main").attr("src",datapath+"plots/"+dropdown2.node().value+"_energy"+themeid+".png");};
-	var dropdown3click=function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"10"+themeid+".png");};
+	var dropdown3click=function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");};
 	var dropdown3plus=function(){
 		dropdown3.node().selectedIndex=Math.min(dropdown3.node().length-1,dropdown3.property("selectedIndex")+1);
 		dropdown3click();
@@ -109,6 +109,6 @@ d3.json(datapath+"json/countries.json", function(d) {
 		}
 	}
 	console.log(source,source2,source3)
-	d3.selectAll(".r11").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"10"+themeid+".png");});
-	d3.selectAll(".r12").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"10"+themeid+".png");});
+	d3.selectAll(".r11").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
+	d3.selectAll(".r12").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
 });
