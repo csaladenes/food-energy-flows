@@ -20,11 +20,11 @@ by Sgouris Sgouridis, Ugo Bardi & Denes Csala
 //NEW DYNAMIC METHOD
 ///////////////////
 //check if in dev mode and on local server
-var datapath =  ((window.location.hostname=='localhost')
-				?'http://localhost:7000/'
-				:"https://dl.dropboxusercontent.com/u/531697/datarepo/"
-				)
-				+'Food-Energy/';
+var datapath =  '';//((window.location.hostname=='localhost')
+				//?'http://localhost:7000/'
+				//:"https://dl.dropboxusercontent.com/u/531697/datarepo/"
+				//)
+				//+'Food-Energy/';
 //////////////////
 
 //<!--DYNAMIC SELECTORS-->
