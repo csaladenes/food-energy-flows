@@ -14,17 +14,16 @@ by Sgouris Sgouridis, Ugo Bardi & Denes Csala
 ////////////
 //var datapath = "https://dl.dropboxusercontent.com/u/333992592/Food-Energy/"  //old MIT dropbox
 //var datapath = "https://dl.dropboxusercontent.com/u/531697/datarepo/Food-Energy/" //default
-//var datapath = "http://food.csaladen.es/"  //if data on github server
+//var datapath = "http://raw.githubusercontent.com/csaladenes/Food-Energy/master/"  //if data on github server
 //var datapath = "" //for local testing
 ////////////////////
 //NEW DYNAMIC METHOD
 ///////////////////
 //check if in dev mode and on local server
-var datapath =  '';//((window.location.hostname=='localhost')
-				//?'http://localhost:7000/'
-				//:"https://dl.dropboxusercontent.com/u/531697/datarepo/"
-				//)
-				//+'Food-Energy/';
+var datapath =  ((window.location.hostname=='localhost')
+				?'./'
+				:"http://raw.githubusercontent.com/csaladenes/Food-Energy/master/"
+				);
 //////////////////
 
 //<!--DYNAMIC SELECTORS-->
