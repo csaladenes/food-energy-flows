@@ -327,8 +327,9 @@ d3.json(datapath+"json/countries.json", function(d) {
 	}
 	dropdown.on("change", sourcechange);
 	var setyears = function() {
-		
-		d3.json(datapath+"json/"+dropdown.node().value+"m.json", function(d) {
+		var c0=dropdown.node().value.charAt(0);
+		//if (c0=='~') c0='~%20'
+		d3.json(datapath+"json/"+c0+"/"+dropdown.node().value+"m.json", function(d) {
 			var missing=d.missing;
 			var estimated=d.estimated;
 			var interpolatedall=d.interpolated;
@@ -349,7 +350,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 
 				change = function() {
 							
-					var a = datapath+"json/" + dropdown.node() //source JSON name
+					var a = datapath+"json/" +c0+"/" + dropdown.node() //source JSON name
 						.value + yearselect.node().value;
 					
 					if (document.getElementById("b00").checked) a = a + "00";

@@ -108,7 +108,6 @@ d3.json(datapath+"json/countries.json", function(d) {
 			else  dropdown3minus()
 		}
 	}
-	console.log(source,source2,source3)
 	d3.selectAll(".r11").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
 	d3.selectAll(".r12").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
 });
