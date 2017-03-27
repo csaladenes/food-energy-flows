@@ -1,0 +1,1 @@
+{"nodes": [{"name": "Balance", "fill": "#9edae5"}, {"name": "Food", "fill": "#b5cf6b"}, {"name": "Seed", "fill": "#dbdb8d"}], "links": [{"source": 0, "target": 1, "value": 9409.0}, {"source": 2, "target": 0, "value": 736.0}]}

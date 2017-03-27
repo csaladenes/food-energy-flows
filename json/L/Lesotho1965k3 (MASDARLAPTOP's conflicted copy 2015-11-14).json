@@ -1,0 +1,1 @@
+{"nodes": [{"name": "Input"}, {"name": "Output"}, {"name": "Food"}, {"name": "Export"}], "links": [{"source": 0, "target": 2, "value": 128.79256965944273}, {"source": 2, "target": 1, "value": 320.0}, {"source": 0, "target": 3, "value": 1.2074303405572755}, {"source": 3, "target": 1, "value": 3.0}]}
