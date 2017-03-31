@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script src="http://d3plus.org/js/d3.js"></script>
+<script src="http://d3plus.org/js/d3plus.js"></script>
+
+<div id="viz"></div>
+
+<script>
+d3.json("json/A/Australia197531.json",function(data){
+  console.log(data);
+  var nodes = data.nodes;
+  var edges = data.links;
+  var visualization = d3plus.viz()
+    .container("#viz")
+    .edges({"value":edges,"strength":"value"})
+    //.focus({
+    //  "value": "Cereals"
+    //})
+    .id("name")
+    .nodes(nodes)
+    .size(3)
+    .type("network")
+    .draw();
+   })
+</script>
