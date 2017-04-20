@@ -1,6 +1,6 @@
 [<img src="favicon.png" alt="favicon" height=24 width=24 />  Food Energy Flows Exploratorium](http://food.csaladen.es/)
 ===
-[![Food Energy Flows](food_energy_flows_sankey.jpg "Food Energy Flows")](http://food.csaladen.es/){: width=20px}
+[![Food Energy Flows](food_energy_flows_sankey.jpg "Food Energy Flows")](http://food.csaladen.es/)
   
 Investigating the role of food in the global sustainable energy transition and highlighting how society needs to be aware of EROEI (energy return on energy invested) dynamics of the different food sources as it transitions away from fossil fuels and changes its diet.  A project by [Dénes Csala](http://www.csaladen.es/) [Sgouris Sgouridis](http://www.ssgouridis.org/) at [Lancaster University](http://lancaster.ac.uk) and [Masdar Institute of Science and Technology](http://www.masdar.ac.ae/)
 
