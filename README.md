@@ -5,7 +5,7 @@
 Investigating the role of food in the global sustainable energy transition and highlighting how society needs to be aware of EROEI (energy return on energy invested) dynamics of the different food sources as it transitions away from fossil fuels and changes its diet.  A project by [Dénes Csala](http://www.csaladen.es/) [Sgouris Sgouridis](http://www.ssgouridis.org/) at [Lancaster University](http://lancaster.ac.uk) and [Masdar Institute of Science and Technology](http://www.masdar.ac.ae/)
 
 # App
-Try: http://set.csaladen.es
+Try: http://food.csaladen.es
 
 # Articles
 1. [Food and Energy in the Global Sustainable Energy Transition: An Energy Metabolism View of Global Agriculture Systems](http://www.csaladen.es/doc/Denes_Csala_SYDIC_2015.pptx), in preparation
