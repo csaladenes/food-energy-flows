@@ -2,7 +2,7 @@
 ===
 [![Food Energy Flows](food_energy_flows_sankey.jpg "Food Energy Flows")](http://food.csaladen.es/)
   
-Investigating the role of food in the global sustainable energy transition and highlighting how society needs to be aware of EROEI (energy return on energy invested) dynamics of the different food sources as it transitions away from fossil fuels and changes its diet.  A project by [Dénes Csala](http://www.csaladen.es/) [Sgouris Sgouridis](http://www.ssgouridis.org/) at [Lancaster University](http://lancaster.ac.uk) and [Masdar Institute of Science and Technology](http://www.masdar.ac.ae/)
+Investigating the role of food in the global sustainable energy transition and highlighting how society needs to be aware of EROEI (energy return on energy invested) dynamics of the different food sources as it transitions away from fossil fuels and changes its diet.  A project by [Dénes Csala](http://www.csaladen.es/) and [Sgouris Sgouridis](http://www.ssgouridis.org/) at [Lancaster University](http://lancaster.ac.uk) and [Masdar Institute of Science and Technology](http://www.masdar.ac.ae/)
   
 __This is an interactive global visualization and exploration interface (_exploratorium_)__.  
   
@@ -13,12 +13,12 @@ Try: http://food.csaladen.es
 1. [Food and Energy in the Global Sustainable Energy Transition: An Energy Metabolism View of Global Agriculture Systems](http://www.csaladen.es/doc/Denes_Csala_SYDIC_2015.pptx), in preparation
 
 # Models
-Food Energy Flows Exploratorium | [Interactive website](http://food.csaladen.es/) | [source file](http://food.csaladen.es/js/food.js)
-Food Energy Flows Sankey Diagram | [Interactive visualization](http://food.csaladen.es/) | [source file](http://food.csaladen.es/js/sankey.js)
-Food Energy Flows World Map | [Interactive visualization](http://food.csaladen.es/#&map) | [source file](http://food.csaladen.es/map/index.html)
-Food Energy Flows Data Plots | [Interactive visualization](http://food.csaladen.es/#&scatter) | [source file](http://food.csaladen.es/js/scatter.js)
-Food Energy Flows Data Parser | [IPython notebook](http://nbviewer.ipython.org/url/food.csaladen.es/ipython/S1.ipynb) | [source file](http://food.csaladen.es/ipython/S1.ipynb)
-Food Energy Flows Data Plotter | [IPython notebook](http://nbviewer.ipython.org/url/food.csaladen.es/ipython/S2.ipynb) | [source file](http://food.csaladen.es/ipython/S2.ipynb)
+- Food Energy Flows Exploratorium | [Interactive website](http://food.csaladen.es/) | [source file](http://food.csaladen.es/js/food.js) 
+- Food Energy Flows Sankey Diagram | [Interactive visualization](http://food.csaladen.es/) | [source file](http://food.csaladen.es/js/sankey.js)  
+- Food Energy Flows World Map | [Interactive visualization](http://food.csaladen.es/#&map) | [source file](http://food.csaladen.es/map/index.html)
+- Food Energy Flows Data Plots | [Interactive visualization](http://food.csaladen.es/#&scatter) | [source file](http://food.csaladen.es/js/scatter.js)
+- Food Energy Flows Data Parser | [IPython notebook](http://nbviewer.ipython.org/url/food.csaladen.es/ipython/S1.ipynb) | [source file](http://food.csaladen.es/ipython/S1.ipynb)
+- Food Energy Flows Data Plotter | [IPython notebook](http://nbviewer.ipython.org/url/food.csaladen.es/ipython/S2.ipynb) | [source file](http://food.csaladen.es/ipython/S2.ipynb)
 
 # Cite
 As of July 2015, please contact the authors (Dénes, Sgouris) before this citing or using this work in any form - or if you would like to use the data presented on this website more extensively or you would like to collaborate on the project.
