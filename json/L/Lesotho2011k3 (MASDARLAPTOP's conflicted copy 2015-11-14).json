@@ -1,1 +1,0 @@
-{"nodes": [{"name": "Input"}, {"name": "Output"}, {"name": "Food"}, {"name": "Stock Deposit"}], "links": [{"source": 0, "target": 2, "value": 549.73768613974801}, {"source": 2, "target": 1, "value": 871.0}, {"source": 0, "target": 3, "value": 1.2623138602520045}, {"source": 3, "target": 1, "value": 2.0}]}

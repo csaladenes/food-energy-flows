@@ -326,15 +326,15 @@ d3.json(datapath+"json/countries.json", function(d) {
 	}
 	dropdown.on("change", sourcechange);
 	var setyears = function() {
-		var c0=dropdown.node().value.charAt(0);
-		//if (c0=='~') c0='~%20'
-		d3.json(datapath+"json/"+c0+"/"+dropdown.node().value+"m.json", function(d) {
-			var missing=d.missing;
-			var estimated=d.estimated;
-			var interpolatedall=d.interpolated;
-			var eroei=d.eroei;
-			var eroei_raw=d.eroei_raw;
-			var aec=d.aec;
+		JSZipUtils.getBinaryContent(datapath+"json/"+dropdown.node().value+".zip", function(err, rawdata) {
+		var zip = new JSZip(rawdata);
+		var qdata=JSON.parse(zip.files[dropdown.node().value+"m.json"].asText());	  
+			var missing=qdata.missing;
+			var estimated=qdata.estimated;
+			var interpolatedall=qdata.interpolated;
+			var eroei=qdata.eroei;
+			var eroei_raw=qdata.eroei_raw;
+			var aec=qdata.aec;
 			
 			yearselect.selectAll("option").remove();
 			for (var key in interpolatedall) {
@@ -349,8 +349,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 
 				change = function() {
 							
-					var a = datapath+"json/" +c0+"/" + dropdown.node() //source JSON name
-						.value + yearselect.node().value;
+					var a = dropdown.node().value + yearselect.node().value;
 					
 					if (document.getElementById("b00").checked) a = a + "00";
 					if (document.getElementById("b10").checked) a = a + "10";
@@ -525,13 +524,12 @@ d3.json(datapath+"json/countries.json", function(d) {
 					data_quality_info();
 					
 					//<!--MAIN SANKEY-->
-					
-					d3.json(a + ".json", function(d) {
+					var ndata=JSON.parse(zip.files[a+".json"].asText());
 						svg.selectAll("g").remove();
 						sankey = d3.sankey().nodeWidth(30).nodePadding(padding).size([width, height]);
-						sankey.nodes(d.nodes).links(d.links).layout(32);
+						sankey.nodes(ndata.nodes).links(ndata.links).layout(32);
 						var g = svg.append("g") //link
-							.selectAll(".link").data(d.links).enter().append("g").attr("class", "link").sort(function(j, i) {
+							.selectAll(".link").data(ndata.links).enter().append("g").attr("class", "link").sort(function(j, i) {
 								return i.dy - j.dy
 							});
 						var h = g.append("path") //path0
@@ -576,6 +574,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 								tiphide(d);
 							})
 						var mouseovr2=function(d){
+							console.log(d)
 							svg.selectAll(".link").filter(function(l) {
 									return l.source == d || l.target == d;
 								}).transition().style('opacity', highopacity);
@@ -637,7 +636,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 								}, 500);
 						}
 						var c = svg.append("g") //node
-							.selectAll(".node").data(d.nodes).enter().append("g").attr("class", "node").attr("transform", function(i) {
+							.selectAll(".node").data(ndata.nodes).enter().append("g").attr("class", "node").attr("transform", function(i) {
 								return "translate(" + i.x + "," + i.y + ")"
 							}).call(d3.behavior.drag().origin(function(i) {
 								return i
@@ -710,18 +709,16 @@ d3.json(datapath+"json/countries.json", function(d) {
 							h.attr("d", path(0));
 							e.attr("d", path(2))
 						}
-					})
+					//})
 					
 					//<!--EROEI MINI-SANKEY-->
 					
-					
-					d3.json(a.slice(0,a.length-2) + "k" + a3+ ".json", function(d) {
-						
+					var mdata=JSON.parse(zip.files[a.slice(0,a.length-2) + "k" + a3+ ".json"].asText());
 						svg2.selectAll("g").remove();
 						sankey2 = d3.sankey().nodeWidth(13).nodePadding(5).size([125, 50]);
-						sankey2.nodes(d.nodes).links(d.links).layout(32);
+						sankey2.nodes(mdata.nodes).links(mdata.links).layout(32);
 						var g2 = svg2.append("g") //link
-							.selectAll(".link").data(d.links).enter().append("g").attr("class", "link").sort(function(j, i) {
+							.selectAll(".link").data(mdata.links).enter().append("g").attr("class", "link").sort(function(j, i) {
 								return i.dy - j.dy
 							});
 						var h2 = g2.append("path") //path0
@@ -794,7 +791,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 						}
 	
 						var c2 = svg2.append("g") //node
-							.selectAll(".node").data(d.nodes).enter().append("g").attr("class", "node").attr("transform", function(i) {
+							.selectAll(".node").data(mdata.nodes).enter().append("g").attr("class", "node").attr("transform", function(i) {
 								return "translate(" + i.x + "," + i.y + ")"
 							})
 						c2.append("rect") //node
@@ -831,7 +828,7 @@ d3.json(datapath+"json/countries.json", function(d) {
 							}).filter(function(i) {
 								return i.x < 100
 							}).attr("x", 3 + sankey2.nodeWidth()).attr("text-anchor", "start")
-					})
+					//})
 					
 				};
 				

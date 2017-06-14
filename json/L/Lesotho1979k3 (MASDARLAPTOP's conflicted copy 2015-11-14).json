@@ -1,1 +1,0 @@
-{"nodes": [{"name": "Input"}, {"name": "Output"}, {"name": "Food"}], "links": [{"source": 0, "target": 2, "value": 263.0}, {"source": 2, "target": 1, "value": 500.0}]}

@@ -1,1 +1,0 @@
-{"nodes": [{"name": "Balance", "fill": "#9edae5"}, {"name": "Food", "fill": "#b5cf6b"}, {"name": "Fossil Fuels", "fill": "#c49c94"}, {"name": "Labor", "fill": "#7f7f7f"}], "links": [{"source": 0, "target": 1, "value": 1.8958374214302545}, {"source": 2, "target": 0, "value": 0.58591135487155144}, {"source": 3, "target": 0, "value": 0.71635744255459877}]}
