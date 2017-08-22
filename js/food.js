@@ -39,7 +39,7 @@ String.prototype.addLines = function(){ return this.replace(/,/g,"\n")}
 //check if in dev mode and on local server
 var datapath =  ((window.location.hostname=='localhost')
 				?'./'
-				:"http://raw.githubusercontent.com/csaladenes/Food-Energy/master/"
+				:"https://raw.githubusercontent.com/csaladenes/Food-Energy/master/"
 				);
 //////////////////
 
