@@ -39,7 +39,7 @@ d3.json(datapath+"json/countries.json", function(d) {
     for (var key in d.countries) {
         dropdown2.append("option").text(d.countries[key]);
     };
-	dropdown2.node().value="~ World"; //select initial country, optional, otherwise defaults to first entry in list
+	dropdown2.node().value="World"; //select initial country, optional, otherwise defaults to first entry in list
 	
 	for (var i=1961;i<2012;i++) {
         dropdown3.append("option").text(i);
