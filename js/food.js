@@ -74,8 +74,9 @@ function disp_content(a,hash){
 }
 
 //window.location.hash = "&10&1998&~-World" //set this if you want a predefined destination
+var inithash="";
 var myhash=window.location.hash.addSpaces()
-var inithash=myhash;
+var inithash=inithash+myhash;
 if ((myhash=="#&map")||(myhash=="#&description")||(myhash=="#&scatter")) {
 	myhash="";
 	}
