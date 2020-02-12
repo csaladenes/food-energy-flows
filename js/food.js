@@ -348,7 +348,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 			if (mycountry) {
 				dropdown.node().value = mycountry;
 			} else {
-				dropdown.node().value = "World"; //select initial country, optional, otherwise defaults to first entry in list
+				dropdown.node().value = "United States"; //select initial country, optional, otherwise defaults to first entry in list
 			}
 			dropdown.on("change", sourcechange);
 			var setyears = function () {
