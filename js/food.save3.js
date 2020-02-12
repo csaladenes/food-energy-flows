@@ -95,7 +95,6 @@ d3.select("#mypie2").style("margin-right", widepie / 2 + 10)
 var piewidth = widepie
 
 function updatepie(data, placeholder, placelabel1, placelabel2, pievalue, flow) {
-	// console.log(data,data.reduce((accum,item) => accum + item.v, 0))
     one = flow
     if (flow) {
         piewidth = widepie
@@ -316,7 +315,7 @@ var tiphide=function(d){
 			
 }
 
-d3.json(datapath+"json/countries.json", function(d) {
+d3.json("https://food.csaladen.es/json/countries.json", function(d) {
 	dropdown.selectAll("option").remove();
     for (var key in d.countries) {
         dropdown.append("option").text(d.countries[key]);
@@ -324,11 +323,11 @@ d3.json(datapath+"json/countries.json", function(d) {
 	if (mycountry) {
 		dropdown.node().value=mycountry; 
     } else {
-		dropdown.node().value="World"; //select initial country, optional, otherwise defaults to first entry in list
+		dropdown.node().value="Germany"; //select initial country, optional, otherwise defaults to first entry in list
 	}
 	dropdown.on("change", sourcechange);
 	var setyears = function() {
-		JSZipUtils.getBinaryContent(datapath+"json/"+dropdown.node().value+".zip", function(err, rawdata) {
+		JSZipUtils.getBinaryContent("https://food.csaladen.es/json/"+dropdown.node().value+".zip", function(err, rawdata) {
 		var zip = new JSZip(rawdata);
 		var qdata=JSON.parse(zip.files[dropdown.node().value+"m.json"].asText());	  
 			var missing=qdata.missing;
@@ -485,31 +484,31 @@ d3.json(datapath+"json/countries.json", function(d) {
 							qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">Complete</b></td></tr><tr><td>All data is available in the database.</td></tr>";
 						}
 						else {
-							if ((interpolated.length+estimated.length<3)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▪▪▪▪▪▪▫").style("color","#2a2");
+							if ((interpolated.length+estimated.length<3)&(missing.length<3)) {d3.select("#quality").text("xxxxxxxxx_").style("color","#2a2");
 								qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">Very High</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<5)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▪▪▪▪▪▪▫").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">Very High</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<7)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▪▪▪▪▪▫▫").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">High</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<5)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▪▪▪▪▪▫▫").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">High</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<3)&(missing.length<5)) {d3.select("#quality").text("▪▪▪▪▪▪▪▪▫▫").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">High</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<5)&(missing.length<5)) {d3.select("#quality").text("▪▪▪▪▪▪▪▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<7)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▪▪▪▪▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<9)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▪▪▪▪▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<11)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▪▪▪▫▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<9)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▪▪▪▫▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<7)&(missing.length<5)) {d3.select("#quality").text("▪▪▪▪▪▪▫▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<5)&(missing.length<7)) {d3.select("#quality").text("▪▪▪▪▪▪▫▫▫▫").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<13)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▪▪▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<11)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▪▪▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<9)&(missing.length<5)) {d3.select("#quality").text("▪▪▪▪▪▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<9)&(missing.length<7)) {d3.select("#quality").text("▪▪▪▪▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<11)&(missing.length<5)) {d3.select("#quality").text("▪▪▪▪▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<13)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▪▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<15)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▪▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<17)&(missing.length<1)) {d3.select("#quality").text("▪▪▪▫▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<15)&(missing.length<3)) {d3.select("#quality").text("▪▪▪▫▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<13)&(missing.length<5)) {d3.select("#quality").text("▪▪▪▫▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
-							else if ((interpolated.length+estimated.length<11)&(missing.length<7)) {d3.select("#quality").text("▪▪▪▫▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
-							else {d3.select("#quality").text("▪▪▫▫▫▫▫▫▫▫").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";};
+							else if ((interpolated.length+estimated.length<5)&(missing.length<1)) {d3.select("#quality").text("xxxxxxxxx_").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">Very High</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<7)&(missing.length<1)) {d3.select("#quality").text("xxxxxxxx__").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">High</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<5)&(missing.length<3)) {d3.select("#quality").text("xxxxxxxx__").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">High</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<3)&(missing.length<5)) {d3.select("#quality").text("xxxxxxxx__").style("color","#2a2");qualitytooltip=qualitytooltip+"<b style='color:#2a2;'"+">High</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<5)&(missing.length<5)) {d3.select("#quality").text("xxxxxxx___").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<7)&(missing.length<3)) {d3.select("#quality").text("xxxxxxx___").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<9)&(missing.length<1)) {d3.select("#quality").text("xxxxxxx___").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<11)&(missing.length<1)) {d3.select("#quality").text("xxxxxx____").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<9)&(missing.length<3)) {d3.select("#quality").text("xxxxxx____").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<7)&(missing.length<5)) {d3.select("#quality").text("xxxxxx____").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<5)&(missing.length<7)) {d3.select("#quality").text("xxxxxx____").style("color","#f60");qualitytooltip=qualitytooltip+"<b style='color:#f60;'"+">Medium</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<13)&(missing.length<1)) {d3.select("#quality").text("xxxxx_____").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<11)&(missing.length<3)) {d3.select("#quality").text("xxxxx_____").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<9)&(missing.length<5)) {d3.select("#quality").text("xxxxx_____").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<9)&(missing.length<7)) {d3.select("#quality").text("xxxx______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<11)&(missing.length<5)) {d3.select("#quality").text("xxxx______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<13)&(missing.length<3)) {d3.select("#quality").text("xxxx______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<15)&(missing.length<1)) {d3.select("#quality").text("xxxx______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Fair</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<17)&(missing.length<1)) {d3.select("#quality").text("xxx_______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<15)&(missing.length<3)) {d3.select("#quality").text("xxx_______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<13)&(missing.length<5)) {d3.select("#quality").text("xxx_______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
+							else if ((interpolated.length+estimated.length<11)&(missing.length<7)) {d3.select("#quality").text("xxx_______").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";}
+							else {d3.select("#quality").text("xx________").style("color","#D90000");qualitytooltip=qualitytooltip+"<b style='color:#D90000;'"+">Low</b></td></tr>";};
 							if (missing.length>0) qualitytooltip=qualitytooltip+"<tr><td><b>Missing data:</b></td></tr><tr><td>"+JSON.stringify(missing).replace(/\"/g,"").replace(/\,/g,"</td></tr><tr><td>").replace(/\[/g,"").replace(/\]/g,"")+"</td></tr>";
 							if (estimated.length>0) qualitytooltip=qualitytooltip+"<tr><td><b>Estimated data:</b></td></tr><tr><td>"+JSON.stringify(estimated).replace(/\"/g,"").replace(/\,/g,"</td></tr><tr><td>").replace(/\[/g,"").replace(/\]/g,"")+"</td></tr>";
 							if (interpolated.length>0) qualitytooltip=qualitytooltip+"<tr><td><b>Interpolated data:</b></td></tr><tr><td>"+JSON.stringify(interpolated).replace(/\"/g,"").replace(/\,/g,"</td></tr><tr><td>").replace(/\[/g,"").replace(/\]/g,"")+"</td></tr>";

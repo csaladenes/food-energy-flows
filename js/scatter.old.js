@@ -34,19 +34,19 @@ var dropdown2 = d3.select("#json_sources2");
 var dropdown3 = d3.select("#json_sources3");
 var scrollscatter=function(a){};
 
-d3.json("https://food.csaladen.es/json/countries.json", function(d) {
+d3.json(datapath+"json/countries.json", function(d) {
 	dropdown2.selectAll("option").remove();
     for (var key in d.countries) {
         dropdown2.append("option").text(d.countries[key]);
     };
-	dropdown2.node().value="Germany"; //select initial country, optional, otherwise defaults to first entry in list
+	dropdown2.node().value="World"; //select initial country, optional, otherwise defaults to first entry in list
 	
 	for (var i=1961;i<2012;i++) {
         dropdown3.append("option").text(i);
     };
 	dropdown3.node().value=2010;
 	
-	d3.select("#main").attr("src","https://food.csaladen.es/plots/"+dropdown2.node().value+"_energy"+themeid+".png");
+	d3.select("#main").attr("src",datapath+"plots/"+dropdown2.node().value+"_energy"+themeid+".png");
 	
 	var source=function(){
 	var genders = document.getElementsByName("r11");
@@ -70,8 +70,8 @@ d3.json("https://food.csaladen.es/json/countries.json", function(d) {
 	
 	var dr2=true;	
 	
-	var dropdown2click=function(){dr2=true;d3.select("#main").attr("src","https://food.csaladen.es/plots/"+dropdown2.node().value+"_energy"+themeid+".png");};
-	var dropdown3click=function(){dr2=false;d3.select("#main").attr("src","https://food.csaladen.es/plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");};
+	var dropdown2click=function(){dr2=true;d3.select("#main").attr("src",datapath+"plots/"+dropdown2.node().value+"_energy"+themeid+".png");};
+	var dropdown3click=function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");};
 	var dropdown3plus=function(){
 		dropdown3.node().selectedIndex=Math.min(dropdown3.node().length-1,dropdown3.property("selectedIndex")+1);
 		dropdown3click();
@@ -107,6 +107,6 @@ d3.json("https://food.csaladen.es/json/countries.json", function(d) {
 			else  dropdown3minus()
 		}
 	}
-	d3.selectAll(".r11").on("click", function(){dr2=false;d3.select("#main").attr("src","https://food.csaladen.es/plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
-	d3.selectAll(".r12").on("click", function(){dr2=false;d3.select("#main").attr("src","https://food.csaladen.es/plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
+	d3.selectAll(".r11").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
+	d3.selectAll(".r12").on("click", function(){dr2=false;d3.select("#main").attr("src",datapath+"plots/"+dropdown3.node().value+"_log"+source2()+"_"+source()+"00"+themeid+".png");});
 });

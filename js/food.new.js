@@ -95,7 +95,7 @@ d3.select("#mypie2").style("margin-right", widepie / 2 + 10)
 var piewidth = widepie
 
 function updatepie(data, placeholder, placelabel1, placelabel2, pievalue, flow) {
-	console.log('d')
+	console.log(data,data.reduce((accum,item) => accum + item.v, 0))
     one = flow
     if (flow) {
         piewidth = widepie
