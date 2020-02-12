@@ -92,9 +92,10 @@ var inithash = inithash + myhash;
 if ((myhash == "#&map") || (myhash == "#&description") || (myhash == "#&scatter")) {
 	myhash = "";
 }
-var myindex = myhash.slice(2, 4)
-var myyear = myhash.slice(5, 9)
+var myindex = myhash.slice(2, 4);
+var myyear = myhash.slice(5, 9);
 var mycountry = myhash.slice(10, myhash.length);
+
 
 //<!--PIE CHARTS-->
 
@@ -102,8 +103,8 @@ var widepie = Math.max(220, parseInt(d3.select("#mypie").style("width")));
 var highpie = parseInt(d3.select("#mypie").style("height"));
 var mbottom = 0;
 var one = true;
-d3.select("#mypie2").style("width", widepie / 2)
-d3.select("#mypie2").style("margin-right", widepie / 2 + 10)
+d3.select("#mypie2").style("width", widepie / 2);
+d3.select("#mypie2").style("margin-right", widepie / 2 + 10);
 var piewidth = widepie;
 
 function updatepie(data, placeholder, placelabel1, placelabel2, pievalue, flow) {
@@ -111,36 +112,37 @@ function updatepie(data, placeholder, placelabel1, placelabel2, pievalue, flow) 
 	one = flow;
 	if (flow) {
 		piewidth = widepie;
-		mbottom = 285 + 25
+		mbottom = 285 + 25;
 	} else {
-		piewidth = widepie / 2
-		mbottom = 285 + 40
+		piewidth = widepie / 2;
+		mbottom = 285 + 40;
 	}
 	if (document.getElementById("legend").checked) {
 		nv.addGraph(function () {
 			var chart = nv.models.pieChart().x(function (d) {
-					return d.l
+					return d.l;
 				}).y(function (d) {
-					return d.v
+					return d.v;
 				})
 				.showLabels(true) //Display pie labels
 				.labelThreshold(0.05) //Configure the minimum slice size for labels to show up
 				.labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
 				.donut(true) //Turn on Donut mode.
 				.donutRatio(0.35); //Configure how big you want the donut hole size to be.
-			d3.select(placeholder).style("width", piewidth)
-			d3.select(placeholder).style("height", highpie - mbottom)
-			d3.select(placeholder).style("margin-bottom", mbottom)
-			d3.selectAll(placeholder + " svg").selectAll(".centerpielabel").remove()
-			d3.selectAll(placeholder + " svg").append("text").attr("x", parseInt(d3.select(placeholder).style("width")) / 2).attr("y", parseInt(d3.select(placeholder).style("height")) - parseInt(d3.select(placeholder).style("width")) / 2 - 10).attr("class", "centerpielabel").text(placelabel1)
-			d3.selectAll(placeholder + " svg").append("text").attr("x", parseInt(d3.select(placeholder).style("width")) / 2).attr("y", parseInt(d3.select(placeholder).style("height")) - parseInt(d3.select(placeholder).style("width")) / 2 + 4).attr("class", "centerpielabel").text(placelabel2)
+			d3.select(placeholder).style("width", piewidth);
+			d3.select(placeholder).style("height", highpie - mbottom);
+			d3.select(placeholder).style("margin-bottom", mbottom);
+			d3.selectAll(placeholder + " svg").selectAll(".centerpielabel").remove();
+			d3.selectAll(placeholder + " svg").append("text").attr("x", parseInt(d3.select(placeholder).style("width")) / 2).attr("y", parseInt(d3.select(placeholder).style("height")) - parseInt(d3.select(placeholder).style("width")) / 2 - 10).attr("class", "centerpielabel").text(placelabel1);
+			d3.selectAll(placeholder + " svg").append("text").attr("x", parseInt(d3.select(placeholder).style("width")) / 2).attr("y", parseInt(d3.select(placeholder).style("height")) - parseInt(d3.select(placeholder).style("width")) / 2 + 4).attr("class", "centerpielabel").text(placelabel2);
+			var pietext = '';
 			if (supplyselected) {
-				var pietext = format(pievalue)
+				pietext = format(pievalue);
 			} else {
-				var pietext = format(pievalue) //was format2
+				pietext = format(pievalue); //was format2
 			}
-			d3.selectAll(placeholder + " svg").append("text").attr("x", parseInt(d3.select(placeholder).style("width")) / 2).attr("y", parseInt(d3.select(placeholder).style("height")) - parseInt(d3.select(placeholder).style("width")) / 2 + 18).attr("class", "centerpielabel").text(pietext)
-			d3.select(placeholder + " svg").datum(data).transition().duration(350).call(chart)
+			d3.selectAll(placeholder + " svg").append("text").attr("x", parseInt(d3.select(placeholder).style("width")) / 2).attr("y", parseInt(d3.select(placeholder).style("height")) - parseInt(d3.select(placeholder).style("width")) / 2 + 18).attr("class", "centerpielabel").text(pietext);
+			d3.select(placeholder + " svg").datum(data).transition().duration(350).call(chart);
 			return chart;
 		});
 	}
@@ -156,12 +158,12 @@ function updpieleg() {
 
 function updpievis() {
 	if (document.getElementById("legend").checked) {
-		show("#mypie")
+		show("#mypie");
 		document.getElementById("legend2").disabled = false;
-		if (!one) show("#mypie2")
+		if (!one) show("#mypie2");
 	} else {
 		document.getElementById("legend2").disabled = true;
-		hide(".pielegend")
+		hide(".pielegend");
 	}
 }
 
@@ -195,9 +197,9 @@ function linearRegression(y, x) {
 		sum_yy += (y[i] * y[i]);
 	}
 
-	lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
-	lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
-	lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+	lr.slope = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+	lr.intercept = (sum_y - lr.slope * sum_x) / n;
+	lr.r2 = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
 
 	return lr;
 }
@@ -212,18 +214,18 @@ var format2Number = d3.format(",.2f"),
 	format1Number = d3.format(",.1f"),
 	formatNumber = d3.format(",.0f"),
 	format = function (a) {
-		return formatNumber(a)
+		return formatNumber(a);
 	},
 	format1 = function (a) {
-		return format1Number(a)
+		return format1Number(a);
 	},
 	format2 = function (a) {
-		return format2Number(a)
+		return format2Number(a);
 	},
 	color = d3.scale.category20();
-d3.select("#chart").style("width", document.getElementById("chart").offsetWidth - sizecorrection)
-d3.select("#titlebar").style("width", document.getElementById("titlebar").offsetWidth - sizecorrection)
-d3.select("#timeslider").style("width", document.getElementById("titlebar").offsetWidth)
+d3.select("#chart").style("width", document.getElementById("chart").offsetWidth - sizecorrection);
+d3.select("#titlebar").style("width", document.getElementById("titlebar").offsetWidth - sizecorrection);
+d3.select("#timeslider").style("width", document.getElementById("titlebar").offsetWidth);
 var margin = {
 		top: 70,
 		right: 10,
@@ -239,7 +241,7 @@ var calo = '--';
 var a3 = "1";
 var year = 0;
 if (myyear) {
-	var prevyear = myyear
+	var prevyear = myyear;
 } else {
 	var prevyear = 2010;
 } //select initial year, optional, otherwise defaults to first entry in list
@@ -266,19 +268,19 @@ document.addEventListener("keydown", function (event) {
 			case 37: // left
 			case 38: // up
 				if (d3.select("#content").style("opacity") == 1) {
-					scrollsankey(1)
+					scrollsankey(1);
 				} //scroll only if we are on the sankey page
 				else if (d3.select("#scatter").style("opacity") == 1) {
-					scrollscatter(1)
+					scrollscatter(1);
 				} //scroll if on the scatter page
 				break;
 			case 34: // pg down
 			case 39: // right
 			case 40: // down 
 				if (d3.select("#content").style("opacity") == 1) {
-					scrollsankey(-1)
+					scrollsankey(-1);
 				} else if (d3.select("#scatter").style("opacity") == 1) {
-					scrollscatter(-1)
+					scrollscatter(-1);
 				}
 				break;
 		}
@@ -329,7 +331,7 @@ var tipshow = function (d) {
 			.style("top", (d3.event.pageY - 30) + "px");
 	}
 
-}
+};
 var tiphide = function (d) {
 	old = d;
 	tooltipdiv.transition()
@@ -338,7 +340,7 @@ var tiphide = function (d) {
 		.style("opacity", 0)
 		.style("z-index", -10);
 
-}
+};
 
 d3.json(datapath + "json/countries.json", function (d) {
 			dropdown.selectAll("option").remove();
@@ -368,7 +370,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 						}
 						yearselect.node().value = Math.max(Math.min(prevyear, Math.max.apply(null, Object.keys(interpolatedall))), Math.min.apply(null, Object.keys(interpolatedall)));
 
-						d3.select("#cid").text(dropdown.node().value)
+						d3.select("#cid").text(dropdown.node().value);
 
 
 						//<!--SANKEY DIAGRAM-->
@@ -414,7 +416,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 							} else {
 								paddingmultiplier = 50;
 							}
-							padding = paddingmultiplier * (1 - densityslider.getValue()[0]) + 3
+							padding = paddingmultiplier * (1 - densityslider.getValue()[0]) + 3;
 
 							//<!--EROEI TIME-GRAPH-->
 
@@ -433,13 +435,13 @@ d3.json(datapath + "json/countries.json", function (d) {
 										y: d[key]
 									});
 								}
-								for (var key in d) {
+								for (key in d) {
 									sin2.push({
 										x: parseInt(key),
 										y: e[key] / e[min]
 									});
 								}
-								for (var key in f) {
+								for (key in f) {
 									sin3.push({
 										x: parseInt(key),
 										y: f[key]
@@ -497,8 +499,8 @@ d3.json(datapath + "json/countries.json", function (d) {
 
 							var data_quality_info = function () {
 
-								d3.select("#EROEI").text(parseFloat(eroei[a3][yearselect.node().value]).toFixed(2))
-								d3.select("#yid").text(yearselect.node().value)
+								d3.select("#EROEI").text(parseFloat(eroei[a3][yearselect.node().value]).toFixed(2));
+								d3.select("#yid").text(yearselect.node().value);
 
 								var interpolated = interpolatedall[yearselect.node().value];
 
@@ -591,7 +593,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 										tipshow();
 									})
 									.on("mouseout", tiphide);
-							} //data_quality_info
+							}; //data_quality_info
 
 							data_quality_info();
 
@@ -599,43 +601,42 @@ d3.json(datapath + "json/countries.json", function (d) {
 								d3.select(a).style('opacity', highopacity);
 								if (supplyselected) {
 									if (d.value != 0) {
-										calo = format2(d.prod / (d.value * 0.00116222222 / 100))
-									} else calo = '--'
-									tiptext = "<tr><td style='font-weight:bold;color:" + d.source.color + ";'>" + d.source.name + "</td><td style='font-size:24px;'>→</td><td style='font-weight:bold;color:" + d.target.color + ";'>" + d.target.name + "</td></tr><tr><td>Weight</td><td>" + format(d.value) + "</td><td> ktonnes</td></tr><tr><td>Energy</td><td>" + format2(d.prod) + "</td><td> TWh</td></tr><tr><td>Caloric value</td><td>" + calo + "</td><td>kcal/100g</td></tr>"
+										calo = format2(d.prod / (d.value * 0.00116222222 / 100));
+									} else calo = '--';
+									tiptext = "<tr><td style='font-weight:bold;color:" + d.source.color + ";'>" + d.source.name + "</td><td style='font-size:24px;'>→</td><td style='font-weight:bold;color:" + d.target.color + ";'>" + d.target.name + "</td></tr><tr><td>Weight</td><td>" + format(d.value) + "</td><td> ktonnes</td></tr><tr><td>Energy</td><td>" + format2(d.prod) + "</td><td> TWh</td></tr><tr><td>Caloric value</td><td>" + calo + "</td><td>kcal/100g</td></tr>";
 								} else {
 									if (d.prod != 0) {
-										calo = format2(d.value / (d.prod * 0.00116222222 / 100))
-									} else calo = '--'
-									tiptext = "<tr><td style='font-weight:bold;color:" + d.source.color + ";'>" + d.source.name + "</td><td style='font-size:24px;'>→</td><td style='font-weight:bold;color:" + d.target.color + ";'>" + d.target.name + "</td></tr><tr><td>Energy</td><td>" + format2(d.value) + "</td><td> TWh</td></tr><tr><td>Weight</td><td>" + format(d.prod) + "</td><td> ktonnes</td></tr><tr><td>Caloric value</td><td>" + calo + "</td><td>kcal/100g</td></tr>"
+										calo = format2(d.value / (d.prod * 0.00116222222 / 100));
+									} else calo = '--';
+									tiptext = "<tr><td style='font-weight:bold;color:" + d.source.color + ";'>" + d.source.name + "</td><td style='font-size:24px;'>→</td><td style='font-weight:bold;color:" + d.target.color + ";'>" + d.target.name + "</td></tr><tr><td>Energy</td><td>" + format2(d.value) + "</td><td> TWh</td></tr><tr><td>Weight</td><td>" + format(d.prod) + "</td><td> ktonnes</td></tr><tr><td>Caloric value</td><td>" + calo + "</td><td>kcal/100g</td></tr>";
 								}
 								tipshow(d);
 								pietooltip = setTimeout(function () {
 									hide("#mypie2");
 									updatepie(eval(d.supply), "#mypie", d.source.name, d.target.name, d.value, true);
 								}, 500);
-							}
-
+							};
 							var mouseovr2 = function (d) {
-								var nodesource = new Array();
-								var nodetarget = new Array();
+								var nodesource = [];
+								var nodetarget = [];
 								svg.selectAll(".link").filter(function (l) {
 									return l.source == d || l.target == d;
 								}).transition().style('opacity', highopacity);
 								svg.selectAll(".link").filter(function (l) {
 									return l.target == d;
 								})[0].forEach(function (l) {
-									nodesource.push(JSON.parse("{\"l\":\"" + l.__data__.source.name + "\", \"v\":" + l.__data__.value + "}"))
-								})
+									nodesource.push(JSON.parse("{\"l\":\"" + l.__data__.source.name + "\", \"v\":" + l.__data__.value + "}"));
+								});
 								svg.selectAll(".link").filter(function (l) {
 									return l.source == d;
 								})[0].forEach(function (l) {
-									nodetarget.push(JSON.parse("{\"l\":\"" + l.__data__.target.name + "\", \"v\":" + l.__data__.value + "}"))
-								})
+									nodetarget.push(JSON.parse("{\"l\":\"" + l.__data__.target.name + "\", \"v\":" + l.__data__.value + "}"));
+								});
 								if (nodesource.length == 0) {
-									nodesource = eval('[{\"l\":\"None\", \"v\":0}]')
+									nodesource = eval('[{\"l\":\"None\", \"v\":0}]');
 								}
 								if (nodetarget.length == 0) {
-									nodetarget = eval('[{\"l\":\"None\", \"v\":0}]')
+									nodetarget = eval('[{\"l\":\"None\", \"v\":0}]');
 								}
 
 								if (supplyselected) {
@@ -649,7 +650,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 										return d.v;
 									})) + " TWh</td></tr><tr><td>Outgoing</td><td>" + format2(d3.sum(nodetarget, function (d) {
 										return d.v;
-									})) + " TWh</td></tr>"
+									})) + " TWh</td></tr>";
 								}
 								var outin = format2(d3.sum(nodetarget, function (d) {
 									return d.v;
@@ -675,7 +676,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 
 
 								}, 500);
-							}
+							};
 
 							//<!--MAIN SANKEY-->
 							var ndata = JSON.parse(zip.files[a + ".json"].asText());
@@ -684,7 +685,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 							sankey.nodes(ndata.nodes).links(ndata.links).layout(32);
 							var g = svg.append("g") //link
 								.selectAll(".link").data(ndata.links).enter().append("g").attr("class", "link").sort(function (j, i) {
-									return i.dy - j.dy
+									return i.dy - j.dy;
 								});
 							var h = g.append("path") //path0
 								.attr("d", path(0));
@@ -695,7 +696,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 
 							g.attr("fill", function (i) {
 									if (i.source.fill) return i.source.fill;
-									else return i.source.color = color(i.source.name.replace(/ .*/, ""))
+									else return i.source.color = color(i.source.name.replace(/ .*/, ""));
 								})
 								.attr("opacity", lowopacity)
 								.on("mouseover", function (d) {
@@ -707,23 +708,23 @@ d3.json(datapath + "json/countries.json", function (d) {
 									d3.select(this).style('opacity', lowopacity);
 									window.clearTimeout(pietooltip);
 									tiphide(d);
-								})
+								});
 							var c = svg.append("g") //node
 								.selectAll(".node").data(ndata.nodes).enter().append("g").attr("class", "node").attr("transform", function (i) {
-									return "translate(" + i.x + "," + i.y + ")"
+									return "translate(" + i.x + "," + i.y + ")";
 								}).call(d3.behavior.drag().origin(function (i) {
-									return i
+									return i;
 								}).on("dragstart", function () {
-									this.parentNode.appendChild(this)
+									this.parentNode.appendChild(this);
 								}).on("drag", b));
 							c.append("rect") //node
 								.attr("height", function (i) {
-									return i.dy
+									return i.dy;
 								}).attr("width", sankey.nodeWidth()).style("fill", function (i) {
 									if (i.fill) return i.color = i.fill;
-									else return i.color = color(i.name.replace(/ .*/, ""))
+									else return i.color = color(i.name.replace(/ .*/, ""));
 								}).style("stroke", function (i) {
-									return d3.rgb(i.color).darker(2)
+									return d3.rgb(i.color).darker(2);
 								}).on("mouseover", function (d) {
 									mouseovr2(d);
 								}).on("click", function (d) {
@@ -738,30 +739,30 @@ d3.json(datapath + "json/countries.json", function (d) {
 									svg.selectAll(".link").filter(function (l) {
 										return l.source == d;
 									}).attr("display", function () {
-										if (d3.select(this).attr("display") == "none") return "inline"
-										else return "none"
+										if (d3.select(this).attr("display") == "none") return "inline";
+										else return "none";
 									});
-								})
+								});
 							c.append("text") //node
 								.attr("x", -6).attr("y", function (i) {
-									return i.dy / 2
+									return i.dy / 2;
 								}).attr("dy", ".35em").attr("text-anchor", "end").attr("transform", null).text(function (i) {
-									return i.name
+									return i.name;
 								}).filter(function (i) {
-									return i.x < width / 2
+									return i.x < width / 2;
 								}).attr("x", 6 + sankey.nodeWidth()).attr("text-anchor", "start");
 							c.append("text") //node
 								.attr("x", function (i) {
-									return -i.dy / 2
+									return -i.dy / 2;
 								})
 								.attr("y", function (i) {
-									return i.dx / 2 + 6
+									return i.dx / 2 + 6;
 								})
 								.attr("transform", "rotate(270)").attr("text-anchor", "middle").text(function (i) {
 									if (i.dy > 50) {
 										if (i.value < 1) return format2(i.value);
 										else if (i.value < 10) return format1(i.value);
-										else return format(i.value)
+										else return format(i.value);
 									}
 								})
 								.attr("fill", "#aa8") //hardcoded from theme
@@ -772,19 +773,19 @@ d3.json(datapath + "json/countries.json", function (d) {
 							function b(i) { //dragmove
 								if (document.getElementById("ymove").checked) {
 									if (document.getElementById("xmove").checked) {
-										d3.select(this).attr("transform", "translate(" + (i.x = Math.max(0, Math.min(width - i.dx, d3.event.x))) + "," + (i.y = Math.max(0, Math.min(height - i.dy, d3.event.y))) + ")")
+										d3.select(this).attr("transform", "translate(" + (i.x = Math.max(0, Math.min(width - i.dx, d3.event.x))) + "," + (i.y = Math.max(0, Math.min(height - i.dy, d3.event.y))) + ")");
 									} else {
-										d3.select(this).attr("transform", "translate(" + i.x + "," + (i.y = Math.max(0, Math.min(height - i.dy, d3.event.y))) + ")")
+										d3.select(this).attr("transform", "translate(" + i.x + "," + (i.y = Math.max(0, Math.min(height - i.dy, d3.event.y))) + ")");
 									}
 								} else {
 									if (document.getElementById("xmove").checked) {
-										d3.select(this).attr("transform", "translate(" + (i.x = Math.max(0, Math.min(width - i.dx, d3.event.x))) + "," + i.y + ")")
+										d3.select(this).attr("transform", "translate(" + (i.x = Math.max(0, Math.min(width - i.dx, d3.event.x))) + "," + i.y + ")");
 									}
 								}
 								sankey.relayout();
 								f.attr("d", path(1));
 								h.attr("d", path(0));
-								e.attr("d", path(2))
+								e.attr("d", path(2));
 							}
 							//})
 
@@ -796,7 +797,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 							sankey2.nodes(mdata.nodes).links(mdata.links).layout(32);
 							var g2 = svg2.append("g") //link
 								.selectAll(".link").data(mdata.links).enter().append("g").attr("class", "link").sort(function (j, i) {
-									return i.dy - j.dy
+									return i.dy - j.dy;
 								});
 							var h2 = g2.append("path") //path0
 								.attr("d", path(0));
@@ -806,26 +807,26 @@ d3.json(datapath + "json/countries.json", function (d) {
 								.attr("d", path(2));
 							g2.attr("fill", function (i) {
 								if (i.source.fill) return i.source.fill;
-								else return i.source.color = color(i.source.name.replace(/ .*/, ""))
+								else return i.source.color = color(i.source.name.replace(/ .*/, ""));
 							}).attr("opacity", lowopacity);
 							var mouseovr3 = function (d) {
-								var nodesource = new Array();
-								var nodetarget = new Array();
+								var nodesource = [];
+								var nodetarget = [];
 								svg2.selectAll(".link").filter(function (l) {
 									return l.target == d;
 								})[0].forEach(function (l) {
-									nodesource.push(JSON.parse("{\"l\":\"" + l.__data__.source.name + "\", \"v\":" + l.__data__.value + "}"))
-								})
+									nodesource.push(JSON.parse("{\"l\":\"" + l.__data__.source.name + "\", \"v\":" + l.__data__.value + "}"));
+								});
 								svg2.selectAll(".link").filter(function (l) {
 									return l.source == d;
 								})[0].forEach(function (l) {
-									nodetarget.push(JSON.parse("{\"l\":\"" + l.__data__.target.name + "\", \"v\":" + l.__data__.value + "}"))
-								})
+									nodetarget.push(JSON.parse("{\"l\":\"" + l.__data__.target.name + "\", \"v\":" + l.__data__.value + "}"));
+								});
 								if (nodesource.length == 0) {
-									nodesource = eval('[{\"l\":\"None\", \"v\":0}]')
+									nodesource = eval('[{\"l\":\"None\", \"v\":0}]');
 								}
 								if (nodetarget.length == 0) {
-									nodetarget = eval('[{\"l\":\"None\", \"v\":0}]')
+									nodetarget = eval('[{\"l\":\"None\", \"v\":0}]');
 								}
 
 								if (supplyselected) {
@@ -839,7 +840,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 										return d.v;
 									})) + " TWh</td></tr><tr><td>Outgoing</td><td>" + format2(d3.sum(nodetarget, function (d) {
 										return d.v;
-									})) + " TWh</td></tr>"
+									})) + " TWh</td></tr>";
 								}
 								var outin = format2(d3.sum(nodetarget, function (d) {
 									return d.v;
@@ -865,20 +866,20 @@ d3.json(datapath + "json/countries.json", function (d) {
 
 
 								}, 500);
-							}
+							};
 
 							var c2 = svg2.append("g") //node
 								.selectAll(".node").data(mdata.nodes).enter().append("g").attr("class", "node").attr("transform", function (i) {
-									return "translate(" + i.x + "," + i.y + ")"
-								})
+									return "translate(" + i.x + "," + i.y + ")";
+								});
 							c2.append("rect") //node
 								.attr("height", function (i) {
-									return i.dy
+									return i.dy;
 								}).attr("width", sankey2.nodeWidth()).style("fill", function (i) {
 									if (i.fill) return i.color = i.fill;
-									else return i.color = color(i.name.replace(/ .*/, ""))
+									else return i.color = color(i.name.replace(/ .*/, ""));
 								}).style("stroke", function (i) {
-									return d3.rgb(i.color).darker(2)
+									return d3.rgb(i.color).darker(2);
 								}).on("mouseover", function (d) {
 									mouseovr3(d);
 								}).on("click", function (d) {
@@ -889,22 +890,22 @@ d3.json(datapath + "json/countries.json", function (d) {
 								});
 							c2.append("text") //node
 								.attr("x", -3).attr("y", function (i) {
-									return i.dy / 2
+									return i.dy / 2;
 								}).attr("dy", ".35em").attr("font-size", "12px").attr("text-anchor", "end").attr("transform", null).text(function (i) {
 									if (i.dy > 5) {
 										if (i.name == "Balance") return "";
 										else
-										if (i.name == "Renewables & Nuclear") return "Renew"
-										if (i.name == "Crop Residue") return "Resid"
+										if (i.name == "Renewables & Nuclear") return "Renew";
+										if (i.name == "Crop Residue") return "Resid";
 										if (i.name == "Food")
-											if ((a3 == 3) || (a3 == 2)) return "Prod"
-										if (i.name == "Biofuels & Other") return "Biofu"
-										if ((i.name == "Stock Draw") | (i.name == "Stock Deposit")) return "Stock"
+											if ((a3 == 3) || (a3 == 2)) return "Prod";
+										if (i.name == "Biofuels & Other") return "Biofu";
+										if ((i.name == "Stock Draw") | (i.name == "Stock Deposit")) return "Stock";
 										else return i.name.slice(0, 6);
 									} else return "";
 								}).filter(function (i) {
-									return i.x < 100
-								}).attr("x", 3 + sankey2.nodeWidth()).attr("text-anchor", "start")
+									return i.x < 100;
+								}).attr("x", 3 + sankey2.nodeWidth()).attr("text-anchor", "start");
 							//})
 
 						};
@@ -914,17 +915,17 @@ d3.json(datapath + "json/countries.json", function (d) {
 						function yearchange() {
 							year = yearselect.node().value - yearselect.node().options[0].value + 1;
 							d3.select("#timeslider").select(".value").text(parseInt(yearselect.node().value));
-							timedragdealer.setValue((year - 1) / (yearselect.node().length - 1), 0, false)
+							timedragdealer.setValue((year - 1) / (yearselect.node().length - 1), 0, false);
 						}
 
 						scrollsankey = function (a) { //scroll delta
 							if (a < 0) {
-								year = Math.min(yearselect.node().length, year + 1)
+								year = Math.min(yearselect.node().length, year + 1);
 							} else {
-								year = Math.max(1, year - 1)
+								year = Math.max(1, year - 1);
 							}
-							timedragdealer.setValue((year - 1) / (yearselect.node().length - 1), 0, false)
-						}
+							timedragdealer.setValue((year - 1) / (yearselect.node().length - 1), 0, false);
+						};
 
 						//<!--TIME SCROLL-->
 
@@ -933,7 +934,7 @@ d3.json(datapath + "json/countries.json", function (d) {
 								x: 0,
 								steps: 100, //yearselect.node().length,
 								animationCallback: function (a, b) {
-									d3.select("#timeslider").select(".value").text(parseInt(yearselect.node().options[0].text) + Math.round(a * (parseInt(yearselect.node().options[document.getElementById("years").length - 1].text) - parseInt(yearselect.node().options[0].text))))
+									d3.select("#timeslider").select(".value").text(parseInt(yearselect.node().options[0].text) + Math.round(a * (parseInt(yearselect.node().options[document.getElementById("years").length - 1].text) - parseInt(yearselect.node().options[0].text))));
 								},
 								callback: function (a, b) {
 									year = Math.round(a * (yearselect.node().length - 1)) + 1;
@@ -961,4 +962,4 @@ d3.json(datapath + "json/countries.json", function (d) {
 						prevyear = yearselect.node().value;
 						setyears();
 					}
-				})
+				});
