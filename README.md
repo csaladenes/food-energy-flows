@@ -32,3 +32,7 @@ You can find a detailed description of the model creation, data mining and analy
 # Credit
 Dénes Csala, 2017  
 http://csaladen.es
+
+## 💫 Stars over time
+[![Stargazers over time](https://starchart.cc/csaladenes/food-energy-flows.svg?variant=adaptive)](https://starchart.cc/csaladenes/food-energy-flows)
+
